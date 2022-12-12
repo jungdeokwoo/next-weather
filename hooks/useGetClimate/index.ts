@@ -1,6 +1,7 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query'
 import { AxiosResult, Climate } from '@type/Api'
 import axios, { AxiosError, AxiosResponse } from 'axios'
+import { getWeeksLastDate } from 'utils/getDate'
 
 export const getClimate = async (startDate: number): Promise<AxiosResult> => {
   const response: AxiosResponse = await axios(
@@ -14,7 +15,7 @@ export const getClimate = async (startDate: number): Promise<AxiosResult> => {
         dataCd: 'ASOS',
         dateCd: 'DAY',
         startDt: startDate,
-        endDt: startDate + 6,
+        endDt: getWeeksLastDate(startDate),
         stnIds: 108,
       },
     },
