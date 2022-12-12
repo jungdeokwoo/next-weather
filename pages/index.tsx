@@ -1,16 +1,39 @@
 import { useGetClimate } from 'hooks/useGetClimate'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { getWeeksFirstDate } from 'utils/getDate'
 
 export default function Home() {
-  const { data, isLoading } = useGetClimate(20221201, {
+  const [date, setDate] = useState(20221201)
+  const { data, isLoading } = useGetClimate(getWeeksFirstDate(date), {
     select: data =>
       data.items.item.map(item => {
         const { avgTa, maxTa, minTa, sumRn, tm, stnNm } = item
         const newData = { avgTa, maxTa, minTa, sumRn, tm, stnNm }
         return newData
       }),
+    enabled: String(date).length === 8,
   })
 
-  console.log(data, '///////', isLoading)
+  const DateHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDate(parseInt(event.target.value))
+  }
 
-  return <div>메인페이지°C</div>
+  return (
+    <HomeContent>
+      <DateInput type="text" onChange={DateHandler} value={date | 0} />
+      <ul>
+        {data?.map(climate => (
+          <li key={climate.tm}>
+            <h1>날짜 : {climate.tm}</h1>
+            <h2>평균온도 : {climate.avgTa}°C</h2>
+          </li>
+        ))}
+      </ul>
+    </HomeContent>
+  )
 }
+
+const HomeContent = styled.main``
+
+const DateInput = styled.input``
