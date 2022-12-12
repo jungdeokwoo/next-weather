@@ -1,0 +1,72 @@
+export type Climate = {
+  avgCm5Te: string
+  avgCm10Te: string
+  avgCm20Te: string
+  avgCm30Te: string
+  avgLmac: string
+  avgM05Te: string
+  avgM10Te: string
+  avgM15Te: string
+  avgM30Te: string
+  avgM50Te: string
+  avgPa: string
+  avgPs: string
+  avgPv: string
+  avgRhm: string
+  avgTa: string
+  avgTca: string
+  avgTd: string
+  avgTs: string
+  avgWs: string
+  ddMefs: string
+  ddMefsHrmt: string
+  ddMes: string
+  ddMesHrmt: string
+  hr1MaxIcsr: string
+  hr1MaxIcsrHrmt: string
+  hr1MaxRn: string
+  hr1MaxRnHrmt: string
+  hr24SumRws: string
+  iscs: string
+  maxInsWs: string
+  maxInsWsHrmt: string
+  maxInsWsWd: string
+  maxPs: string
+  maxPsHrmt: string
+  maxTa: string
+  maxTaHrmt: string
+  maxWd: string
+  maxWs: string
+  maxWsHrmt: string
+  maxWsWd: string
+  mi10MaxRn: string
+  mi10MaxRnHrmt: string
+  minPs: string
+  minPsHrmt: string
+  minRhm: string
+  minRhmHrmt: string
+  minTa: string
+  minTaHrmt: string
+  minTg: string
+  n99Rn: string
+  ssDur: string
+  stnId: string
+  stnNm: string
+  sumDpthFhsc: string
+  sumFogDur: string
+  sumGsr: string
+  sumLrgEv: string
+  sumRn: string
+  sumRnDur: string
+  sumSmlEv: string
+  sumSsHr: string
+  tm: string
+}
+
+export type AxiosResult = {
+  dataType: string
+  items: { item: Climate[] }
+  numOfRows: number
+  pageNo: number
+  totalCount: number
+}
