@@ -16,22 +16,21 @@ const DateToNum = (date: Date): number => {
 
 export const getWeeksFirstDate = (date: number) => {
   if (String(date).length < 8) return 0
-  const SelectedDate = NumToDate(date)
-  const weeksFirstDay = new Date(
-    SelectedDate.getFullYear(),
-    SelectedDate.getMonth(),
-    SelectedDate.getDate() - SelectedDate.getDay(),
-  )
-  return DateToNum(weeksFirstDay)
+  const selectedDate = NumToDate(date)
+  selectedDate.setDate(selectedDate.getDate() - selectedDate.getDay())
+  return DateToNum(selectedDate)
 }
 
 export const getWeeksLastDate = (date: number) => {
   if (String(date).length < 8) return 0
-  const SelectedDate = NumToDate(date)
-  const weeksLastDay = new Date(
-    SelectedDate.getFullYear(),
-    SelectedDate.getMonth(),
-    SelectedDate.getDate() - SelectedDate.getDay() + 6,
+  const selectedDate = NumToDate(date)
+  const lastDate = selectedDate.setDate(
+    selectedDate.getDate() - selectedDate.getDay() + 6,
   )
-  return DateToNum(weeksLastDay)
+  if (lastDate > Date.now()) {
+    const today = new Date()
+    today.setDate(today.getDate() - 1)
+    return DateToNum(today)
+  }
+  return DateToNum(selectedDate)
 }
