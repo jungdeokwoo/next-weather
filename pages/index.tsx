@@ -4,24 +4,24 @@ import styled from 'styled-components'
 import { getWeeksFirstDate } from 'utils/getDate'
 
 export default function Home() {
-  const [date, setDate] = useState(20221201)
-  const { data, isLoading } = useGetClimate(getWeeksFirstDate(date), {
+  const [selectDate, setSelectDate] = useState(20221211)
+  const { data, isLoading } = useGetClimate(getWeeksFirstDate(selectDate), {
     select: data =>
       data.items.item.map(item => {
         const { avgTa, maxTa, minTa, sumRn, tm, stnNm } = item
         const newData = { avgTa, maxTa, minTa, sumRn, tm, stnNm }
         return newData
       }),
-    enabled: String(date).length === 8,
+    enabled: String(selectDate).length === 8,
   })
 
   const DateHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDate(parseInt(event.target.value))
+    setSelectDate(parseInt(event.target.value))
   }
 
   return (
     <HomeContent>
-      <DateInput type="text" onChange={DateHandler} value={date | 0} />
+      <DateInput type="text" onChange={DateHandler} value={selectDate | 0} />
       <ul>
         {data?.map(climate => (
           <li key={climate.tm}>
